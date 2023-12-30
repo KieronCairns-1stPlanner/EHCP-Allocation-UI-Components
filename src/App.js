@@ -41,6 +41,7 @@ const Search = ({ onSearch, onFocus, onBlur }) => {
     </div>
   );
 }
+
 const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isInputFocused, setIsInputFocused] = useState(false);
@@ -68,7 +69,7 @@ const App = () => {
       <h1>Stories</h1>
       <Search onSearch={handleSearch} onFocus={handleFocus} onBlur={handleBlur} />
       <hr />
-      {isInputFocused && <List list={searchedStories} />}
+      {isInputFocused && searchTerm.length > 1 && <List list={searchedStories} />}
     </div>  
   );
 }
