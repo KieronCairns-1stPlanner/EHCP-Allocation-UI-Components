@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { links } from "./data/links.js"
 
 const List = props => {
@@ -17,62 +17,62 @@ const List = props => {
   ));
 }
 
-const Search = props => {
+const Search = ({ onSearch, onFocus, onBlur }) => {
   const [searchTerm, setSearchTerm] = React.useState('');
 
   const handleChange = event => {
-    setSearchTerm(event.target.value)
-
-    props.onSearch(event);
-  }
+    setSearchTerm(event.target.value);
+    onSearch(event);
+  };
   
-  return(
+  return (
     <div>
       <label htmlFor='search'>Search: </label>
-      <input id="search" type='text' onChange={props.onSearch} />
-
-    <p>
-      Searching for <strong>{searchTerm}</strong>
-    </p>
-
+      <input 
+        id="search" 
+        type='text' 
+        onChange={handleChange} 
+        onFocus={onFocus} 
+        onBlur={onBlur} 
+      />
+      <p>
+        Searching for <strong>{searchTerm}</strong>
+      </p>
     </div>
-  )
-
+  );
 }
-
 const App = () => {
-
-
-  const [searchTerm, setSearchTerm] = React.useState('');
-
-
-  const handleChange = event => {
-    console.log(event)
-  }
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handleSearch = event => {
-    console.log(event.target.value)
-    setSearchTerm(event.target.value)
-  }
+    setSearchTerm(event.target.value);
+  };
+
+  const handleFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsInputFocused(false);
+  };
 
   const searchedStories = links.filter(story => {
-
     return story.EstablishmentName
       .toLowerCase()
-      .includes(searchTerm.toLocaleLowerCase());
+      .includes(searchTerm.toLowerCase());
   });
 
   return (
     <div>
-    <h1>Stories</h1>
-
-    <Search onSearch={handleSearch} />
-
-    <hr />
-
-    <List list={searchedStories} />
+      <h1>Stories</h1>
+      <Search onSearch={handleSearch} onFocus={handleFocus} onBlur={handleBlur} />
+      <hr />
+      {isInputFocused && <List list={searchedStories} />}
     </div>  
   );
 }
 
 export default App;
+
+
