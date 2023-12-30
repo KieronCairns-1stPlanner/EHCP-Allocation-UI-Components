@@ -1,3 +1,16 @@
+.list-item {
+  cursor: pointer;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.list-item:hover {
+  background-color: #f0f0f0; /* Change the color as per your design */
+}
+
+
 .App {
   text-align: center;
 }

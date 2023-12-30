@@ -5,7 +5,7 @@ import { links } from "./data/links.js"
 
 const List = ({ list, onSelectItem }) => {
   return list.map(item => (
-    <div key={item.objectID} onClick={() => onSelectItem(item)}>
+    <div key={item.objectID} className="list-item" onClick={() => onSelectItem(item)}>
       <span>{item.EstablishmentName}</span>
       <span>{item.Street}</span>
       <span>{item.Town}</span>
