@@ -58,11 +58,13 @@ const App = () => {
     setIsInputFocused(false);
   };
 
-  const searchedStories = links.filter(story => {
+  const searchedStories = links
+  .filter(story => {
     return story.EstablishmentName
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-  });
+  })
+  .slice(0, 10); // Only take the first 10 results
 
   return (
     <div>
