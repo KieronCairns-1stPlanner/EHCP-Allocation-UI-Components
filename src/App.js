@@ -58,13 +58,22 @@ const App = () => {
     setIsInputFocused(false);
   };
 
-  const searchedStories = links
-  .filter(story => {
-    return story.EstablishmentName
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-  })
-  .slice(0, 10); // Only take the first 10 results
+  const searchedStories = links.filter(story => {
+    // Split the search term into individual words and convert to lowercase
+    const searchWords = searchTerm.toLowerCase().split(' ');
+
+    // Create a single string from all the keys and convert to lowercase
+    const storyString = [
+      story.EstablishmentName, 
+      story.Street, 
+      story.Town, 
+      story.Countyname, 
+      story.Postcode
+    ].join(' ').toLowerCase();
+
+    // Check if each word in the search term is present in the story string
+    return searchWords.every(word => storyString.includes(word));
+  }).slice(0, 10); // Only take the first 10 results
 
   return (
     <div>
