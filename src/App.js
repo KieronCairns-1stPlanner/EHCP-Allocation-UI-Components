@@ -59,10 +59,18 @@ const App = () => {
   };
 
   const handleSelectItem = (item) => {
-    setSearchTerm(item.EstablishmentName);
+    // Create a string with the item properties separated by commas
+    const itemDetails = [
+      item.EstablishmentName,
+      item.Street,
+      item.Town,
+      item.Countyname,
+      item.Postcode
+    ].join(', ');
+
+    setSearchTerm(itemDetails);
     setIsInputFocused(false); // Optionally hide the list after selection
   };
-
   const searchedStories = links.filter(story => {
     // Split the search term into individual words and convert to lowercase
     const searchWords = searchTerm.toLowerCase().split(' ');
