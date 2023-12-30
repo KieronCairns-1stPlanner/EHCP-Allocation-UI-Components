@@ -92,10 +92,10 @@ const App = () => {
     <div>
       <h1>Stories</h1>
       <Search 
-  searchTerm={searchTerm}
-  onSearch={handleSearch} 
-  onFocus={handleFocus} 
-/>      <hr />
+      searchTerm={searchTerm}
+      onSearch={handleSearch} 
+      onFocus={handleFocus} />      
+      <hr />
       {isInputFocused && searchTerm.length > 1 && (
         <List list={searchedStories} onSelectItem={handleSelectItem} />
       )}
